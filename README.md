@@ -11,6 +11,8 @@ To reproduce the results of our paper download the files, set the R working dire
 # Data files
 - <b> ProteomeHD_v1_1.csv: </b> This is the ProteomeHD data matrix, consisting of 10,323 proteins and 294 SILAC ratios. An exact copy of this file is Supplementary_Table_S1.csv {DOUBLE CHECK TABLE NAME} in the publication.
 
+- <b> Reactome_TP_FP.csv: </b> This is a compressed csv file containing the "gold standard", i.e. a list of true and false positive protein pairs. It was compiled as described in the article
+
 
 
 
