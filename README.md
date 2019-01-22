@@ -5,6 +5,11 @@ To reproduce the results of our paper download the files, set the R working dire
 
 
 # R scripts
+- <b> Coregulation_scores.R: </b> This script creates the co-regulation scores for protein pairs in ProteomeHD. It first calculates treeClust dissimilarities (using hyperparameters optimised with the tune_treeclust.R script) and turns them into similarities (i.e. 1 - dissimilarity). Using the WGCNA package, the script subsequently performs a sigmoid transformation to create an adjacency matrix (using hyperparameters optimised with the tune_sigmoid.R script). Finally, the script applies the topological overlap measure. The script outputs three files:
+    (a) <i> treeClust_similarities.csv: </i> Contains the treeClust similarities, the adjacency matrix and the TOM values.
+    (b) <i> coregulation_scores.csv: </i> Contains only the final pairwise coregulation scores (treeClust + sigmoid transformation + TOM). 
+    (c) <i> ScaleFreeNess.png: </i> A plot showing that the resulting network is scale free.
+
 - <b> tune_treeclust.R: </b> This script was used to perform a grid search to optimise treeClust / rpart hyperparameters (serule and cp) against true and false positives pairs annoated in the Reactome_TP_FP_10perc_subset_for_GS.csv file. The optimal values turned out to be cp = 0.105 and serule = 1.8, providing a ~10% improvement over default settings.
 
 - <b> tune_sigmoid.R: </b> This script was used to perform a grid search to find the optimal parameters for WGCNA's topological overlap matrix (TOM). These parameters were mu and alpha, which relate to the sigmoid transformation taking place before calculating TOM. The optimal values turned out to be mu = 0.91 and alpha = 37. This step provided a further 10% improvement in performance. Note that this script is designed for execution on a server with 30 free cores.
