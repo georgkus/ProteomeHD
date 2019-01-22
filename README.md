@@ -13,7 +13,7 @@ To reproduce the results of our paper download the files, set the R working dire
 
 - <b> Reactome_TP_FP.7z: </b> This is a compressed csv file containing the "gold standard", i.e. a list of true and false positive protein pairs. It was generated as described in the article.
 
-- <b> Reactome_TP_FP_10perc_subset_for_GS.7z: </b> A
+- <b> Reactome_TP_FP_10perc_subset_for_GS.7z: </b> This is a compressed csv file containing a subset of the Reactome gold standard (Reactome_TP_FP.7z). It was used to optimise treeClust hyperparameters in a grid search.
 
 
 
