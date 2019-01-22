@@ -5,8 +5,8 @@ To reproduce the results of our paper download the files, set the R working dire
 
 
 # R scripts
-- <b> Coregulation_scores.R: </b> This script creates the co-regulation scores for protein pairs in ProteomeHD. It first calculates treeClust dissimilarities (using hyperparameters optimised with the tune_treeclust.R script) and turns them into similarities (i.e. 1 - dissimilarity). Using the WGCNA package, the script subsequently performs a sigmoid transformation to create an adjacency matrix (using hyperparameters optimised with the tune_sigmoid.R script). Finally, the script applies the topological overlap measure. The script outputs three files:
-    (a) <i> treeClust_similarities.csv: </i> Contains the treeClust similarities, the adjacency matrix and the TOM values.
+- <b> Coregulation_scores.R: </b> This script creates the co-regulation scores for protein pairs in ProteomeHD. It first calculates treeClust dissimilarities (using hyperparameters optimised with the tune_treeclust.R script) and turns them into similarities (i.e. 1 - dissimilarity). Using the WGCNA package, the script subsequently performs a sigmoid transformation to create an adjacency matrix (using hyperparameters optimised with the tune_sigmoid.R script). Finally, the script applies the topological overlap measure, thereby creating the "co-regulation scores". The script outputs three files:
+    (a) <i> treeClust_similarities.csv: </i> Contains the treeClust similarities, the adjacency matrix and the TOM-transformed values.
     (b) <i> coregulation_scores.csv: </i> Contains only the final pairwise coregulation scores (treeClust + sigmoid transformation + TOM). 
     (c) <i> ScaleFreeNess.png: </i> A plot showing that the resulting network is scale free.
 
