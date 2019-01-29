@@ -32,6 +32,8 @@ To reproduce the results of our paper download the files, set the R working dire
 
 - <b> ProHD_stats.R </b> This script outputs basic protein-centric statistics about ProteomeHD, e.g. how many proteins were detected in how many experiments etc. Related to Supplementary Figure 1 {DOUBLE CHECK FIGURE NUMBER }.
 
+- <b> ProHD_peptide_stats.R </b> This script outputs peptide-related stats (number of peptides per protein etc) for ProteomeHD, including microproteins. Related to Supplementary Figure 5 {DOUBLE CHECK FIGURE NUMBER}. It uses the MaxQuant proteinGroups and evidence files, which are available through PRIDE (see below) {MAKE SURE THIS IS TRUE}.
+
 - <b> tune_treeclust.R: </b> This script was used to perform a grid search to optimise treeClust / rpart hyperparameters (serule and cp) against true and false positives pairs annoated in the Reactome_TP_FP_10perc_subset_for_GS.csv file. The optimal values turned out to be cp = 0.105 and serule = 1.8, providing a ~10% improvement over default settings.
 
 - <b> tune_sigmoid.R: </b> This script was used to perform a grid search to find the optimal parameters for WGCNA's topological overlap matrix (TOM). These parameters were mu and alpha, which relate to the sigmoid transformation taking place before calculating TOM. The optimal values turned out to be mu = 0.91 and alpha = 37. This step provided a further 10% improvement in performance. Note that this script is designed for execution on a server with 30 free cores.
@@ -72,6 +74,9 @@ To reproduce the results of our paper download the files, set the R working dire
 
 - <b> curated_gene_disease_associations.tsv </b> and <b> mapa_geneid_4_uniprot_crossref.tsv: </b> These two files can be downloaded from www.disgenet.org and contain their curated list of gene - disease associations and the mapping of their GeneIDs to Uniprot, respectively.
 
+- <b> proteinGroups.txt </b> The complete MaxQuant search result file for ProteomeHD is available at PRIDE {UPDATE THIS WHEN WE HAVE THE IDENTIFIER}.
+
+- <b> evidence.txt </b> The complete evidence file produced by MaxQuant for ProteomeHD is available at PRIDE {UPDATE THIS WHEN WE HAVE THE IDENTIFIER}.
 
 
 
