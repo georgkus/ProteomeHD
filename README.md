@@ -30,6 +30,8 @@ To reproduce the results of our paper download the files, set the R working dire
 
 - <b> ProHD_data_drop_impact.R </b> This script performs PR analyses after randomly removing data points from ProteomeHD, showing that the co-regulation analysis has not reached peak performance yet. This script should be run on a multi-core server, otherwise it will take a very long time to complete.
 
+- <b> ProHD_stats.R </b> This script outputs basic protein-centric statistics about ProteomeHD, e.g. how many proteins were detected in how many experiments etc. Related to Supplementary Figure 1 {DOUBLE CHECK FIGURE NUMBER }.
+
 - <b> tune_treeclust.R: </b> This script was used to perform a grid search to optimise treeClust / rpart hyperparameters (serule and cp) against true and false positives pairs annoated in the Reactome_TP_FP_10perc_subset_for_GS.csv file. The optimal values turned out to be cp = 0.105 and serule = 1.8, providing a ~10% improvement over default settings.
 
 - <b> tune_sigmoid.R: </b> This script was used to perform a grid search to find the optimal parameters for WGCNA's topological overlap matrix (TOM). These parameters were mu and alpha, which relate to the sigmoid transformation taking place before calculating TOM. The optimal values turned out to be mu = 0.91 and alpha = 37. This step provided a further 10% improvement in performance. Note that this script is designed for execution on a server with 30 free cores.
