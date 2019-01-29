@@ -28,7 +28,7 @@ To reproduce the results of our paper download the files, set the R working dire
 
 - <b> Protein_vs_mRNA_part_2.R: </b> This script compares treeClust co-regulation scores based on ProteomeHD with the transcriptomics-based coexpression scores from STRING. Please note that the file "RNA_STRING_Uniprot.csv", which contains Pearson correlation coefficients based on microarrays and RNA-sequencing, is not available. This is because these data were kindly provided to us by the STRING consortium specifically for the purpose of this analysis. Note that these Pearson correlation coefficients are distinct from publically available STRING's coexpression score, which is calibrated against the KEGG database.
 
-<b> ProHD_data_drop_impact.R </b> This script performs PR analyses after randomly removing data points from ProteomeHD, showing that the co-regulation analysis has not reached peak performance yet. This script should be run on a multi-core server, otherwise it will take a very long time to complete.
+- <b> ProHD_data_drop_impact.R </b> This script performs PR analyses after randomly removing data points from ProteomeHD, showing that the co-regulation analysis has not reached peak performance yet. This script should be run on a multi-core server, otherwise it will take a very long time to complete.
 
 - <b> tune_treeclust.R: </b> This script was used to perform a grid search to optimise treeClust / rpart hyperparameters (serule and cp) against true and false positives pairs annoated in the Reactome_TP_FP_10perc_subset_for_GS.csv file. The optimal values turned out to be cp = 0.105 and serule = 1.8, providing a ~10% improvement over default settings.
 
