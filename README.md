@@ -76,9 +76,9 @@ To reproduce the results of our paper download the files, set the R working dire
 
 - <b> curated_gene_disease_associations.tsv </b> and <b> mapa_geneid_4_uniprot_crossref.tsv: </b> These two files can be downloaded from www.disgenet.org and contain their curated list of gene - disease associations and the mapping of their GeneIDs to Uniprot, respectively.
 
-- <b> proteinGroups.txt </b> The complete MaxQuant search result file for ProteomeHD is available at PRIDE {UPDATE THIS WHEN WE HAVE THE IDENTIFIER}.
+- <b> proteinGroups.txt </b> The complete MaxQuant search result file for ProteomeHD is available at PRIDE (project identifier PXD008888).
 
-- <b> evidence.txt </b> The complete evidence file produced by MaxQuant for ProteomeHD is available at PRIDE {UPDATE THIS WHEN WE HAVE THE IDENTIFIER}.
+- <b> evidence.txt </b> The complete evidence file produced by MaxQuant for ProteomeHD is available at PRIDE (project identifier PXD008888).
 
 
 
