@@ -35,6 +35,8 @@ To reproduce the results of our paper download the files, set the R working dire
 - <b> ProHD_peptide_stats.R </b> This script outputs peptide-related stats (number of peptides per protein etc) for ProteomeHD, including microproteins. Related to Supplementary Figure 5 {DOUBLE CHECK FIGURE NUMBER}. It uses the MaxQuant proteinGroups and evidence files, which are available through PRIDE (see below) {MAKE SURE THIS IS TRUE}.
 
 - <b> MP_connectivity.R </b> This script calculates the number of interaction partners of microproteins, as opposed to larger proteins, in ProteomeHD, STRING and BioGRID. This is related to Supplementary Figure 6 {DOUBLE CHECK FIGURE NUMBER}. See below for a description of the input files that it uses.
+
+- <b> Network_plot.R </b> This script plots the co-regulation matrix as a "correlation network" with six different network layouts.
     
 - <b> tune_treeclust.R: </b> This script was used to perform a grid search to optimise treeClust / rpart hyperparameters (serule and cp) against true and false positives pairs annoated in the Reactome_TP_FP_10perc_subset_for_GS.csv file. The optimal values turned out to be cp = 0.105 and serule = 1.8, providing a ~10% improvement over default settings.
 
