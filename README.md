@@ -30,11 +30,11 @@ To reproduce the results of our paper download the files, set the R working dire
 
 - <b> ProHD_data_drop_impact.R </b> This script performs PR analyses after randomly removing data points from ProteomeHD, showing that the co-regulation analysis has not reached peak performance yet. This script should be run on a multi-core server, otherwise it will take a very long time to complete.
 
-- <b> ProHD_stats.R </b> This script outputs basic protein-centric statistics about ProteomeHD, e.g. how many proteins were detected in how many experiments etc. Related to Supplementary Figure 1 {DOUBLE CHECK FIGURE NUMBER }.
+- <b> ProHD_stats.R </b> This script outputs basic protein-centric statistics about ProteomeHD, e.g. how many proteins were detected in how many experiments etc. 
 
-- <b> ProHD_peptide_stats.R </b> This script outputs peptide-related stats (number of peptides per protein etc) for ProteomeHD, including microproteins. Related to Supplementary Figure 5 {DOUBLE CHECK FIGURE NUMBER}. It uses the MaxQuant proteinGroups and evidence files, which are available through PRIDE (see below) {MAKE SURE THIS IS TRUE}.
+- <b> ProHD_peptide_stats.R </b> This script outputs peptide-related stats (number of peptides per protein etc) for ProteomeHD, including microproteins. It uses the MaxQuant proteinGroups and evidence files, which are available through PRIDE (see below).
 
-- <b> MP_connectivity.R </b> This script calculates the number of interaction partners of microproteins, as opposed to larger proteins, in ProteomeHD, STRING and BioGRID. This is related to Supplementary Figure 6 {DOUBLE CHECK FIGURE NUMBER}. See below for a description of the input files that it uses.
+- <b> MP_connectivity.R </b> This script calculates the number of interaction partners of microproteins, as opposed to larger proteins, in ProteomeHD, STRING and BioGRID. See below for a description of the input files that it uses.
 
 - <b> Network_plot.R </b> This script plots the co-regulation matrix as a "correlation network" with six different network layouts.
     
@@ -43,7 +43,7 @@ To reproduce the results of our paper download the files, set the R working dire
 - <b> tune_sigmoid.R: </b> This script was used to perform a grid search to find the optimal parameters for WGCNA's topological overlap matrix (TOM). These parameters were mu and alpha, which relate to the sigmoid transformation taking place before calculating TOM. The optimal values turned out to be mu = 0.91 and alpha = 37. This step provided a further 10% improvement in performance. Note that this script is designed for execution on a server with 30 free cores.
 
 # Data files
-- <b> ProteomeHD_v1_1.7z: </b> This compressed csv file is ProteomeHD, consisting of 10,323 proteins and 294 SILAC ratios. An exact copy of this file is Supplementary_Table_S1.csv {DOUBLE CHECK TABLE NAME} in the publication.
+- <b> ProteomeHD_v1_1.7z: </b> This compressed csv file is ProteomeHD, consisting of 10,323 proteins and 294 SILAC ratios. An exact copy of this file is Supplementary_Table_S1.csv in the publication.
 
 - <b> Reactome_TP_FP.7z: </b> This is a compressed csv file containing the "gold standard", i.e. a list of true and false positive protein pairs. It was generated as described in the article. Note that these pairs are already sorted row-wise in alphabetical order (Protein_1 > Protein_2), for easy merging with other tables.
 
