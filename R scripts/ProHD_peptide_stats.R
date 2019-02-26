@@ -102,11 +102,17 @@ avg_RC_per_exp_cor <- apply( DT[ in_coreg_map == TRUE, ratio_count_cols, with = 
 RC_plot_dt <- merge( data.table( exp = names(avg_RC_per_exp_all), avg_RC_per_exp_all = avg_RC_per_exp_all), 
                      data.table( exp = names(avg_RC_per_exp_cor), avg_RC_per_exp_cor = avg_RC_per_exp_cor) )
 
-# Plot the results: distribution per experiment and cumulative line
-# Don't show means / medians here because they are too large
+# Plot the results: distribution per experiment
+mean_label_all <- paste( "mean = ", round(mean(RC_plot_dt$avg_RC_per_exp_all),1), sep = "")
+mean_label_cor <- paste( "mean = ", round(mean(RC_plot_dt$avg_RC_per_exp_cor),1), sep = "") 
+
 p4 <- ggplot( RC_plot_dt, aes( x = exp))+
         geom_bar(stat = "identity", aes( y = avg_RC_per_exp_cor ), fill = "midnightblue")+
         geom_bar(stat = "identity", aes( y = avg_RC_per_exp_all ), fill = "lightsteelblue")+
+        geom_hline( yintercept = mean(RC_plot_dt$avg_RC_per_exp_all), colour = "lightsteelblue", size = 0.25)+
+        geom_hline( yintercept = mean(RC_plot_dt$avg_RC_per_exp_cor), colour = "midnightblue", size = 0.25)+
+        annotate( geom = "text", label = mean_label_all, x = 40, y = 40, colour = "lightsteelblue", size = 3)+
+        annotate( geom = "text", label = mean_label_cor, x = 40, y = 45, colour = "midnightblue", size = 3)+
         xlab("Experiments in ProteomeHD")+
         ylab("Avg. ratio counts per protein")+
         scale_y_continuous( breaks = seq(0,50,10), limits = c(0,51), expand = c(0,0))+
@@ -115,31 +121,67 @@ p4 <- ggplot( RC_plot_dt, aes( x = exp))+
               axis.ticks.y = element_line(size=0.25), axis.ticks.x = element_blank(),
               axis.line = element_line(colour="black", size=0.25))
 
-# Create plot labels (include medians because there is a large difference here)
-  mean_in_map_rat_label <- paste("mean =", round( DT[ in_coreg_map == TRUE,   mean(`Ratio H/L count`) ], 2) )
-     mean_all_rat_label <- paste("mean =", round( DT[                     ,   mean(`Ratio H/L count`) ], 2) )
-median_in_map_rat_label <- paste("median =", round( DT[ in_coreg_map == TRUE, median(`Ratio H/L count`) ], 2) )
-   median_all_rat_label <- paste("median =", round( DT[                     , median(`Ratio H/L count`) ], 2) )
 
-# Plot the distribution of ratio counts per protein (cumulative)
-p5 <- ggplot(DT, aes(x = `Ratio H/L count`))+
-        geom_histogram(                                    binwidth = 50, boundary = 0, fill = "lightsteelblue")+
-        geom_histogram( data = DT[ in_coreg_map == TRUE ], binwidth = 50, boundary = 0, fill = "midnightblue")+
-        geom_vline(xintercept = DT[                     , mean(`Ratio H/L count`) ], size = 0.25, linetype = "dashed", colour = "lightsteelblue")+
-        geom_vline(xintercept = DT[ in_coreg_map == TRUE, mean(`Ratio H/L count`) ], size = 0.25, linetype = "dashed", colour = "midnightblue")+
-        geom_vline(xintercept = DT[                     , median(`Ratio H/L count`) ], size = 0.25, linetype = "dashed", colour = "lightsteelblue")+
-        geom_vline(xintercept = DT[ in_coreg_map == TRUE, median(`Ratio H/L count`) ], size = 0.25, linetype = "dashed", colour = "midnightblue")+
-        annotate("text", x = 2500, y = 2000, label = mean_in_map_rat_label, size = 3, colour = "midnightblue")+      
-        annotate("text", x = 1500, y = 2000, label = mean_all_rat_label   , size = 3, colour = "lightsteelblue")+      
-        annotate("text", x = 1000, y = 2000, label = median_in_map_rat_label, size = 3, colour = "midnightblue")+      
-        annotate("text", x = 300 , y = 2000, label = median_all_rat_label   , size = 3, colour = "lightsteelblue")+      
-        scale_x_continuous( limits = c(0,4000), breaks = seq(0,10000,1000), expand = c(0,0))+
-        scale_y_continuous( breaks = seq(0,3000,1000), expand = c(0,0))+
-        xlab("Redundant peptide observations used\nfor quantitation (ratio counts)")+
-        ylab("Protein count")+
-        theme(panel.background = element_blank(), panel.grid = element_blank(), axis.text=element_text(size=5),
-              axis.title=element_text(size=6), axis.ticks = element_line(size=0.25), 
-              axis.line = element_line(colour="black", size=0.25), legend.position = "none")
+# The following plot is included in the script for completion, but is not used the paper
+
+# # Create plot labels (include medians because there is a large difference here)
+#   mean_in_map_rat_label <- paste("mean =", round( DT[ in_coreg_map == TRUE,   mean(`Ratio H/L count`) ], 2) )
+#      mean_all_rat_label <- paste("mean =", round( DT[                     ,   mean(`Ratio H/L count`) ], 2) )
+# median_in_map_rat_label <- paste("median =", round( DT[ in_coreg_map == TRUE, median(`Ratio H/L count`) ], 2) )
+#    median_all_rat_label <- paste("median =", round( DT[                     , median(`Ratio H/L count`) ], 2) )
+# 
+# # Plot the distribution of ratio counts per protein (cumulative)
+# p5 <- ggplot(DT, aes(x = `Ratio H/L count`))+
+#         geom_histogram(                                    binwidth = 50, boundary = 0, fill = "lightsteelblue")+
+#         geom_histogram( data = DT[ in_coreg_map == TRUE ], binwidth = 50, boundary = 0, fill = "midnightblue")+
+#         geom_vline(xintercept = DT[                     , mean(`Ratio H/L count`) ], size = 0.25, linetype = "dashed", colour = "lightsteelblue")+
+#         geom_vline(xintercept = DT[ in_coreg_map == TRUE, mean(`Ratio H/L count`) ], size = 0.25, linetype = "dashed", colour = "midnightblue")+
+#         geom_vline(xintercept = DT[                     , median(`Ratio H/L count`) ], size = 0.25, linetype = "dashed", colour = "lightsteelblue")+
+#         geom_vline(xintercept = DT[ in_coreg_map == TRUE, median(`Ratio H/L count`) ], size = 0.25, linetype = "dashed", colour = "midnightblue")+
+#         annotate("text", x = 2500, y = 2000, label = mean_in_map_rat_label, size = 3, colour = "midnightblue")+      
+#         annotate("text", x = 1500, y = 2000, label = mean_all_rat_label   , size = 3, colour = "lightsteelblue")+      
+#         annotate("text", x = 1000, y = 2000, label = median_in_map_rat_label, size = 3, colour = "midnightblue")+      
+#         annotate("text", x = 300 , y = 2000, label = median_all_rat_label   , size = 3, colour = "lightsteelblue")+      
+#         scale_x_continuous( limits = c(0,4000), breaks = seq(0,10000,1000), expand = c(0,0))+
+#         scale_y_continuous( breaks = seq(0,3000,1000), expand = c(0,0))+
+#         xlab("Redundant peptide observations used\nfor quantitation (ratio counts)")+
+#         ylab("Protein count")+
+#         theme(panel.background = element_blank(), panel.grid = element_blank(), axis.text=element_text(size=5),
+#               axis.title=element_text(size=6), axis.ticks = element_line(size=0.25), 
+#               axis.line = element_line(colour="black", size=0.25), legend.position = "none")
+
+
+## Plot the distribution of ratio counts per MICROprotein
+
+# Get the relevant data as above
+avg_RC_per_exp_all_mp <- apply( DT[ `Mol. weight [kDa]` <= 15                       , ratio_count_cols, with = FALSE ], 2, function(x){ mean( x[ x > 0 ] )})
+avg_RC_per_exp_cor_mp <- apply( DT[ `Mol. weight [kDa]` <= 15 & in_coreg_map == TRUE, ratio_count_cols, with = FALSE ], 2, function(x){ mean( x[ x > 0 ] )})
+
+# Create a table for plotting
+RC_plot_dt_mp <- merge( data.table( exp = names(avg_RC_per_exp_all_mp), avg_RC_per_exp_all_mp = avg_RC_per_exp_all_mp), 
+                        data.table( exp = names(avg_RC_per_exp_cor_mp), avg_RC_per_exp_cor_mp = avg_RC_per_exp_cor_mp) )
+
+# Plot the results: distribution per experiment
+mean_label_all <- paste( "mean = ", round(mean(RC_plot_dt_mp$avg_RC_per_exp_all_mp),1), sep = "")
+mean_label_cor <- paste( "mean = ", round(mean(RC_plot_dt_mp$avg_RC_per_exp_cor_mp),1), sep = "") 
+
+p5 <- ggplot( RC_plot_dt_mp, aes( x = exp))+
+        geom_bar(stat = "identity", aes( y = avg_RC_per_exp_cor_mp ), fill = "midnightblue")+
+        geom_bar(stat = "identity", aes( y = avg_RC_per_exp_all_mp ), fill = "lightsteelblue")+
+        geom_hline( yintercept = mean(RC_plot_dt_mp$avg_RC_per_exp_all_mp), colour = "lightsteelblue", size = 0.25)+
+        geom_hline( yintercept = mean(RC_plot_dt_mp$avg_RC_per_exp_cor_mp), colour = "midnightblue", size = 0.25)+
+        annotate( geom = "text", label = mean_label_all, x = 50, y = 30, colour = "lightsteelblue", size = 3)+
+        annotate( geom = "text", label = mean_label_cor, x = 50, y = 25, colour = "midnightblue", size = 3)+
+        xlab("Experiments in ProteomeHD")+
+        ylab("Avg. ratio counts per microprotein")+
+        scale_y_continuous( breaks = seq(0,40,10), limits = c(0,40), expand = c(0,0))+
+        theme(panel.background = element_blank(), panel.grid = element_blank(), 
+              axis.text.x = element_blank(), axis.text.y=element_text(size=5), axis.title=element_text(size=6),
+              axis.ticks.y = element_line(size=0.25), axis.ticks.x = element_blank(),
+              axis.line = element_line(colour="black", size=0.25))
+
+
+## Plot the cumulative distribution of ratio counts per MICROprotein
 
 # Create plot labels for MICROproteins (include medians because there is a large difference here)
   mean_in_map_rat_label_mp <- paste("mean =", round( DT[ `Mol. weight [kDa]` <= 15 & in_coreg_map == TRUE,   mean(`Ratio H/L count`) ], 2) )
@@ -147,7 +189,6 @@ p5 <- ggplot(DT, aes(x = `Ratio H/L count`))+
 median_in_map_rat_label_mp <- paste("median =", round( DT[ `Mol. weight [kDa]` <= 15 & in_coreg_map == TRUE, median(`Ratio H/L count`) ], 2) )
    median_all_rat_label_mp <- paste("median =", round( DT[ `Mol. weight [kDa]` <= 15                       , median(`Ratio H/L count`) ], 2) )
 
-# Plot the same cumulative distribution of peptides per MICROprotein
 p6 <- ggplot(DT[ `Mol. weight [kDa]` <= 15 ], aes(x = `Ratio H/L count`))+
         geom_histogram(                                                                 binwidth = 50, boundary = 0, fill = "lightsteelblue")+
         geom_histogram( data = DT[  `Mol. weight [kDa]` <= 15 & in_coreg_map == TRUE ], binwidth = 50, boundary = 0, fill = "midnightblue")+
