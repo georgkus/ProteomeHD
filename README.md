@@ -1,5 +1,5 @@
 # About this repository
-R scripts and data files related to the manuscript "The human proteome co-regulation map reveals functional relationships between proteins" by Kustatscher <i> et al </i> (2019). The article is available in bioRxiv (https://www.biorxiv.org/content/10.1101/582247v1).
+R scripts and data files related to the manuscript "The human proteome co-regulation map reveals functional relationships between proteins" by Kustatscher <i> et al </i> (https://www.biorxiv.org/content/10.1101/582247v1).
 
 To reproduce the results of our paper download the files, set the R working directory to the download folder and execute the appropriate scripts. All scripts were tested in Ubuntu 18.04,ff but should generally be working on all operating systems. Below is a brief description of each file.
 
